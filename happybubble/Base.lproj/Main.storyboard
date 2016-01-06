@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQA-L6-TfE">
+                                <rect key="frame" x="43" y="572" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Gpa-kL-Oil"/>
+                                    <constraint firstAttribute="height" constant="80" id="az0-QW-KXh"/>
+                                </constraints>
+                                <state key="normal" image="button">
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="button"/>
+                                <connections>
+                                    <action selector="shotSomeBubble:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hAt-7J-r5m"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCa-Xg-JGk">
+                                <rect key="frame" x="261" y="572" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="cUa-SY-jKS"/>
+                                    <constraint firstAttribute="width" constant="80" id="xX4-6e-llu"/>
+                                </constraints>
+                                <state key="normal" image="button">
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="button"/>
+                                <connections>
+                                    <action selector="shotOneBubble:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gZ4-bY-efc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bQA-L6-TfE" secondAttribute="bottom" constant="15" id="0to-dK-k3s"/>
+                            <constraint firstAttribute="trailing" secondItem="dCa-Xg-JGk" secondAttribute="trailing" constant="34" id="CaP-F0-6TQ"/>
+                            <constraint firstItem="bQA-L6-TfE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="43" id="F7G-RW-zLi"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dCa-Xg-JGk" secondAttribute="bottom" constant="15" id="k50-GU-Sqk"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="566" y="407"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="button" width="106" height="119"/>
+    </resources>
+</document>

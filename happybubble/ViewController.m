@@ -39,16 +39,16 @@ NSMutableArray *totlePoints; //纪录所有的点。
     //保证气泡不出界
     //随机的x
     int x = [self getRandomNumber:10 to:(int)self.view.frame.size.width - bubble.bounds.size.width];
-    CGRect startFrame = CGRectMake(x, 450, bubble.bounds.size.width, bubble.bounds.size.height);
+    CGRect startFrame = CGRectMake(x, 500, bubble.bounds.size.width, bubble.bounds.size.height);
     bubble.frame = startFrame;
     [self.view.layer addSublayer:bubble];
     
-    [self risingToSurfaceWith:bubble];
+    [self configerRisingAnimation:bubble];
 }
 
 
 //上升动画
-- (void)risingToSurfaceWith:(Bubble *)bubble {
+- (void)configerRisingAnimation:(Bubble *)bubble {
 
     CABasicAnimation *animation1 = [CABasicAnimation animationWithKeyPath:@"position"];
     animation1.fromValue = [NSValue valueWithCGPoint:bubble.position];
@@ -74,7 +74,7 @@ NSMutableArray *totlePoints; //纪录所有的点。
     group.fillMode = kCAFillModeForwards;
     group.removedOnCompletion = NO;
     group.delegate = self;
-    [group setValue:bubble forKey:@"value1"];
+    [group setValue:bubble forKey:@"first"];
     
     [bubble addAnimation:group forKey:@"kkLayerMove"];
 }
@@ -88,7 +88,14 @@ NSMutableArray *totlePoints; //纪录所有的点。
             
             CAAnimationGroup *group = (CAAnimationGroup *)anim;
             
-            CALayer *layer = [group valueForKey:@"value1"];
+            CALayer *layer = [group valueForKey:@"first"];
+            
+            [layer removeFromSuperlayer];
+        }else if ([anim isKindOfClass:[CAKeyframeAnimation class]]) {
+            
+            CAKeyframeAnimation *key = (CAKeyframeAnimation *)anim;
+            
+            CALayer *layer = [key valueForKey:@"second"];
             
             [layer removeFromSuperlayer];
         }
@@ -99,7 +106,40 @@ NSMutableArray *totlePoints; //纪录所有的点。
     
     _index =0;
     
-    [self creatBubble];
+
+    Bubble *bubble = [[Bubble alloc] init];
+    
+    //保证气泡不出界
+    //随机的x
+    int x = [self getRandomNumber:10 to:(int)self.view.frame.size.width - bubble.bounds.size.width];
+    CGRect startFrame = CGRectMake(x, 500, bubble.bounds.size.width, bubble.bounds.size.height);
+    bubble.frame = startFrame;
+    [self.view.layer addSublayer:bubble];
+
+    //关键帧动画
+    
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    
+    animation.keyPath = @"position";
+    
+    UIBezierPath *airplanePath = [UIBezierPath bezierPath];
+    [airplanePath moveToPoint: CGPointMake(100, 500)];
+    [airplanePath addCurveToPoint: CGPointMake(100, 400) controlPoint1: CGPointMake(0, 474) controlPoint2: CGPointMake(0, 435)];
+    [airplanePath addCurveToPoint: CGPointMake(100, 200) controlPoint1: CGPointMake(200, 350) controlPoint2: CGPointMake(200, 250)];
+    [airplanePath addCurveToPoint: CGPointMake(100, 0) controlPoint1: CGPointMake(0, 150) controlPoint2: CGPointMake(0, 50)];
+    
+    animation.path = airplanePath.CGPath;
+    
+    animation.repeatCount = 0;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    animation.duration = 4.0f;
+    animation.timingFunction=[CAMediaTimingFunction functionWithControlPoints:0.80 :0.27 :0.95 :0.89];
+    animation.delegate=self;
+    [animation setValue:bubble forKey:@"second"];
+    [bubble addAnimation:animation forKey:nil];
+    
+    
 }
 
 - (IBAction)shotSomeBubble:(id)sender {

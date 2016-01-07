@@ -45,12 +45,22 @@
                                     <action selector="shotOneBubble:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gZ4-bY-efc"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uE0-j9-n5Z">
+                                <rect key="frame" x="0.0" y="558" width="375" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="F3L-W2-7X7"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bQA-L6-TfE" secondAttribute="bottom" constant="15" id="0to-dK-k3s"/>
                             <constraint firstAttribute="trailing" secondItem="dCa-Xg-JGk" secondAttribute="trailing" constant="34" id="CaP-F0-6TQ"/>
                             <constraint firstItem="bQA-L6-TfE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="43" id="F7G-RW-zLi"/>
+                            <constraint firstItem="dCa-Xg-JGk" firstAttribute="top" secondItem="uE0-j9-n5Z" secondAttribute="bottom" constant="13" id="cmG-0o-lLp"/>
+                            <constraint firstAttribute="trailing" secondItem="uE0-j9-n5Z" secondAttribute="trailing" id="ghV-ru-EBA"/>
+                            <constraint firstItem="uE0-j9-n5Z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="haF-zF-HID"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dCa-Xg-JGk" secondAttribute="bottom" constant="15" id="k50-GU-Sqk"/>
                         </constraints>
                     </view>
@@ -58,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="566" y="407"/>
+            <point key="canvasLocation" x="565.5" y="406.5"/>
         </scene>
     </scenes>
     <resources>

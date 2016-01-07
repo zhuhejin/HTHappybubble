@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface Bubble : NSObject
+@interface Bubble : CALayer
+
 
 @end

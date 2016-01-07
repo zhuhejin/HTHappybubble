@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "Bubble.h"
 
 #define KMaxTimes 5
 
@@ -16,52 +17,46 @@
 
 @implementation ViewController
 
+//连续产生多个气泡
 float _duration; // 动画 间隔
 float _lastTime; //纪录每一个点的 时刻
 int _index;
-
 NSMutableArray *totlePoints; //纪录所有的点。
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    
     totlePoints = [NSMutableArray array];
-    
-    
-    
-    
     
     [self shotSomeBubble:nil];
 }
 
-
-
 - (void)creatBubble {
     
-    UIImage*    backgroundImage = [UIImage imageNamed:@"bubble"];
-    CALayer*    aLayer = [CALayer layer];
-    
-    int width = (arc4random()%10)+30;
+    Bubble *bubble = [[Bubble alloc] init];
     
     //保证气泡不出界
     //随机的x
-    int x = [self getRandomNumber:10 to:(int)self.view.frame.size.width - width*1.5];
+    int x = [self getRandomNumber:10 to:(int)self.view.frame.size.width - bubble.bounds.size.width];
+    CGRect startFrame = CGRectMake(x, 450, bubble.bounds.size.width, bubble.bounds.size.height);
+    bubble.frame = startFrame;
+    [self.view.layer addSublayer:bubble];
     
-    CGRect startFrame = CGRectMake(x, 450, width, width);
-    aLayer.contents = (id)backgroundImage.CGImage;
-    aLayer.frame = startFrame;
-    
-    [self.view.layer addSublayer:aLayer];
-    
+    [self risingToSurfaceWith:bubble];
+}
+
+
+//上升动画
+- (void)risingToSurfaceWith:(Bubble *)bubble {
+
     CABasicAnimation *animation1 = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation1.fromValue = [NSValue valueWithCGPoint:aLayer.position];
-    CGPoint toPoint = aLayer.position;
+    animation1.fromValue = [NSValue valueWithCGPoint:bubble.position];
+    CGPoint toPoint = bubble.position;
     toPoint.y = 0;
     animation1.toValue = [NSValue valueWithCGPoint:toPoint];
     
-    //移动的速度
+    //加速移动
     animation1.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.80 :0.27 :0.95 :0.89];
     
     CABasicAnimation *scaoleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
@@ -79,13 +74,12 @@ NSMutableArray *totlePoints; //纪录所有的点。
     group.fillMode = kCAFillModeForwards;
     group.removedOnCompletion = NO;
     group.delegate = self;
-    [group setValue:aLayer forKey:@"value1"];
+    [group setValue:bubble forKey:@"value1"];
     
-    [aLayer addAnimation:group forKey:@"kkLayerMove"];
-    
+    [bubble addAnimation:group forKey:@"kkLayerMove"];
 }
 
-
+//动画结束后layer移除
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     
     if (flag) {
@@ -123,9 +117,6 @@ NSMutableArray *totlePoints; //纪录所有的点。
         //两个气泡之间的时间间隔  随机的
         int int1 = (arc4random()%5)+1;
         float f = (float)int1/50;
-        
-//        NSLog(@"%f",f);
-        
         NSArray *array = [NSArray arrayWithObjects:[NSNumber numberWithFloat:f] , nil];
         
         [totlePoints addObject:array];
